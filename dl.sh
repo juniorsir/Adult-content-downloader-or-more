@@ -4,8 +4,33 @@
 # Ensure yt-dlp is installed
 if ! command -v yt-dlp &> /dev/null; then
     echo "yt-dlp could not be found. Please install it first."
-    exit 1
+    
 fi
+
+# Function to install YouTube-dl
+install_youtube_dl() {
+    echo -e "${Y}${L}\n Installing YouTube-dl... \n${N}"
+    pip install yt-dlp
+    pip install yt-dlp -U
+    clear
+}
+# Function to set up configurations
+setup_configs() {
+    echo -e "${Y}${L}\n Setting up configs..." $G" Ak500 \n${N}"
+    sleep 2
+    echo -e "${Y}${L}\n Creating Youtube folder... \n${N}"
+    mkdir -p ~/storage/shared/YouTube
+    sleep 1.5
+    echo -e "${Y}${L}\n Creating youtube-dl config... \n${N}"
+    rm -rf ~/.config/yt-dlp
+    mkdir -p ~/.config/yt-dlp
+    sleep 1.5
+    echo -e "${Y}${L}\n Getting config file... \n${N}"
+    wget -q https://raw.githubusercontent.com/juniorsir/Termux-background-player/main/config -P ~/.config/yt-dlp
+    cd ~/.config/yt-dlp || exit 1
+    chmod +x config
+    sleep 1
+}
 
 # Prompt the user to input the any platform video URL
 echo "Enter the any video URL:"
@@ -13,8 +38,8 @@ read -r VIDEO_URL
 
 # Check if the user provided a URL
 if [ -z "$VIDEO_URL" ]; then
-    echo "No URL entered. Exiting."
-    exit 1
+    echo "No URL entered. Retry..."
+
 fi
 
 # Confirm the URL is from xHamster
