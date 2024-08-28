@@ -25,7 +25,9 @@ pip install yt-dlp
 ### STEP3 : copy and run this command:
 
 ```shell
-
+git clone https://github.com/juniorsir/Adult-content-downloader-or-more.git
+chmod +x dl.sh
+./dl.sh
 ```
 
 ##### (and wait the process to finish.)
